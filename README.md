@@ -34,5 +34,3 @@ A fordításhoz a következő könyvtárakra lesz szükséged:
 - `Adafruit GFX Library`
 - `Adafruit SSD1306`
 - `DHT sensor library` (Adafruit)
-
-   git clone [https://github.com/felhasznalonev/AI-smart-deskhub-Firmware.git](https://github.com/felhasznalonev/AI-smart-deskhub-Firmware.git
