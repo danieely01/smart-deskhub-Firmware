@@ -1,6 +1,6 @@
-# AI Smart Desk Hub - Firmware
+# Smart Desk Hub - Firmware
 
-Ez a repository tartalmazza az AI Smart Desk Hub C++ alapú firmware-ét. A kód egy ESP8266 mikrokontrolleren fut, amely felel a hardveres komponensek (szenzorok, kijelző, gombok) alacsonyszintű vezérléséért, az asztali környezet monitorozásáért, valamint a helyi backend szerverrel való hálózati kommunikációért.
+Ez a repository tartalmazza a Smart Desk Hub C++ alapú firmware-ét. A kód egy ESP8266 mikrokontrolleren fut, amely felel a hardveres komponensek (szenzorok, kijelző, gombok) alacsonyszintű vezérléséért, az asztali környezet monitorozásáért, valamint a helyi backend szerverrel való hálózati kommunikációért.
 
 ## 🛠 Funkciók
 - **Szenzoros adatgyűjtés:** Környezeti hőmérséklet és páratartalom folyamatos olvasása (5 másodpercenként, nem blokkoló módon).
