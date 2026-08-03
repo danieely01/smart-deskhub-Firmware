@@ -1,0 +1,36 @@
+# AI Smart Desk Hub - Firmware
+
+Ez a repository tartalmazza az AI Smart Desk Hub C++ alapú firmware-ét. A kód egy ESP8266 mikrokontrolleren fut, amely felel a hardveres komponensek (szenzorok, kijelző, gombok) alacsonyszintű vezérléséért, az asztali környezet monitorozásáért, valamint a helyi backend szerverrel való hálózati kommunikációért.
+
+## 🛠 Funkciók
+- **Szenzoros adatgyűjtés:** Környezeti hőmérséklet és páratartalom folyamatos olvasása (5 másodpercenként, nem blokkoló módon).
+- **Kijelző vezérlés:** Valós idejű adatok (hőmérséklet, páratartalom) és az aktuális profil renderelése az OLED monitoron.
+- **Állapotvezérlés:** 3 dedikált fizikai gomb beolvasása az azonnali módváltáshoz (Working, Studying, Relaxing).
+- **Hálózati kommunikáció:** HTTP POST kérések küldése a lokális backendnek a kiválasztott világítási és rendszerprofil alapján.
+
+## ⚙️ Hardver Követelmények
+* **Mikrokontroller:** ESP8266 (pl. NodeMCU V3 vagy Wemos D1 Mini)
+* **Szenzor:** DHT22 Hőmérséklet és páratartalom szenzor
+* **Kijelző:** 128x32 I2C OLED (SSD1306, 0x3C címen)
+* 3 db Nyomógomb (Pull-up ellenállással szoftveresen kezelve)
+
+## 🔌 Lábkiosztás (Pinout)
+| Komponens | ESP8266 Pin | Megjegyzés |
+| :--- | :--- | :--- |
+| DHT22 Szenzor Adat | `D5` | |
+| Gomb 1 (Working) | `D6` | `INPUT_PULLUP` beállítva |
+| Gomb 2 (Studying) | `D7` | `INPUT_PULLUP` beállítva |
+| Gomb 3 (Relaxing) | `D3` | A kódban `BTN_GAME`-ként definiálva |
+| OLED SDA | `D2` (I2C Default) | |
+| OLED SCL | `D1` (I2C Default) | |
+
+## 💻 Fejlesztői Környezet és Build
+A projekt szabványos C++ (Arduino keretrendszer) környezetben készült. A fejlesztéshez a **PlatformIO** (VS Code / CLion) vagy az **Arduino IDE** használata javasolt az ESP8266 board csomag telepítése után.
+
+### Függőségek és Könyvtárak
+A fordításhoz a következő könyvtárakra lesz szükséged:
+- `ESP8266WiFi` és `ESP8266HTTPClient` (Beépített ESP8266 csomagok)
+- `Wire` (I2C kommunikációhoz)
+- `Adafruit GFX Library`
+- `Adafruit SSD1306`
+- `DHT sensor library` (Adafruit)
