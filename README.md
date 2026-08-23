@@ -1,36 +1,48 @@
-# Smart Desk Hub - Firmware
+# 🎛️ Smart Desk Hub - Firmware
 
-Ez a repository tartalmazza a Smart Desk Hub C++ alapú firmware-ét. A kód egy ESP8266 mikrokontrolleren fut, amely felel a hardveres komponensek (szenzorok, kijelző, gombok) alacsonyszintű vezérléséért, az asztali környezet monitorozásáért, valamint a helyi backend szerverrel való hálózati kommunikációért.
+This repository contains the C++ based firmware for the Smart Desk Hub. Running on an ESP8266 microcontroller, this code is responsible for the low-level control of hardware components (sensors, display, buttons), monitoring the desktop environment, and handling network communication with the local backend server.
 
-## 🛠 Funkciók
-- **Szenzoros adatgyűjtés:** Környezeti hőmérséklet és páratartalom folyamatos olvasása (5 másodpercenként, nem blokkoló módon).
-- **Kijelző vezérlés:** Valós idejű adatok (hőmérséklet, páratartalom) és az aktuális profil renderelése az OLED monitoron.
-- **Állapotvezérlés:** 3 dedikált fizikai gomb beolvasása az azonnali módváltáshoz (Working, Studying, Relaxing).
-- **Hálózati kommunikáció:** HTTP POST kérések küldése a lokális backendnek a kiválasztott világítási és rendszerprofil alapján.
+## 🎯 The Motivation (Why I built this)
 
-## ⚙️ Hardver Követelmények
-* **Mikrokontroller:** ESP8266 (pl. NodeMCU V3 vagy Wemos D1 Mini)
-* **Szenzor:** DHT22 Hőmérséklet és páratartalom szenzor
-* **Kijelző:** 128x32 I2C OLED (SSD1306, 0x3C címen)
-* 3 db Nyomógomb (Pull-up ellenállással szoftveresen kezelve)
+This project was designed to solve two specific needs in my daily workspace:
 
-## 🔌 Lábkiosztás (Pinout)
-| Komponens | ESP8266 Pin | Megjegyzés |
+* **Filament Care for 3D Printing:** Since I regularly print physical objects using PLA and PETG, monitoring the room's ambient humidity is crucial. High moisture levels can quickly degrade these filaments, so I needed a reliable, real-time environmental display right on my desk to ensure optimal storage conditions.
+* **Mood-Based Lighting Control:** I wanted a physical, tactile interface to instantly adapt my desk's LED lighting to my current activity (Working, Studying, or Relaxing) without interrupting my workflow to open a smart home app.
+
+## 🛠 Features
+
+* **Sensor Data Acquisition:** Continuous reading of ambient temperature and humidity (at 5-second intervals, using a non-blocking approach).
+* **Display Control:** Real-time rendering of environmental data (temperature, humidity) and the currently active profile on the OLED monitor.
+* **State Management:** Hardware-level polling of 3 dedicated physical push buttons for instant mode switching (*Working, Studying, Relaxing*).
+* **Network Communication:** Dispatching HTTP POST requests to the local backend based on the selected lighting and system profile.
+
+## ⚙️ Hardware Requirements
+
+* **Microcontroller:** ESP8266 (e.g., NodeMCU V3 or Wemos D1 Mini)
+* **Sensor:** DHT22 Temperature & Humidity Sensor
+* **Display:** 128x32 I2C OLED (SSD1306, Address `0x3C`)
+* **Actuators:** 3x Push Buttons (handled via software using internal pull-up resistors)
+
+## 🔌 Pinout Configuration
+
+| Component | ESP8266 Pin | Note |
 | :--- | :--- | :--- |
-| DHT22 Szenzor Adat | `D5` | |
-| Gomb 1 (Working) | `D6` | `INPUT_PULLUP` beállítva |
-| Gomb 2 (Studying) | `D7` | `INPUT_PULLUP` beállítva |
-| Gomb 3 (Relaxing) | `D3` | A kódban `BTN_GAME`-ként definiálva |
-| OLED SDA | `D2` (I2C Default) | |
-| OLED SCL | `D1` (I2C Default) | |
+| **DHT22 Sensor Data** | `D5` | - |
+| **Button 1 (Working)** | `D6` | Configured with `INPUT_PULLUP` |
+| **Button 2 (Studying)**| `D7` | Configured with `INPUT_PULLUP` |
+| **Button 3 (Relaxing)**| `D3` | Defined as `BTN_GAME` in code |
+| **OLED SDA** | `D2` | I2C Default |
+| **OLED SCL** | `D1` | I2C Default |
 
-## 💻 Fejlesztői Környezet és Build
-A projekt szabványos C++ (Arduino keretrendszer) környezetben készült. A fejlesztéshez a **PlatformIO** (VS Code / CLion) vagy az **Arduino IDE** használata javasolt az ESP8266 board csomag telepítése után.
+## 💻 Development Environment & Build
 
-### Függőségek és Könyvtárak
-A fordításhoz a következő könyvtárakra lesz szükséged:
-- `ESP8266WiFi` és `ESP8266HTTPClient` (Beépített ESP8266 csomagok)
-- `Wire` (I2C kommunikációhoz)
-- `Adafruit GFX Library`
-- `Adafruit SSD1306`
-- `DHT sensor library` (Adafruit)
+This project was built in a standard C++ (Arduino framework) environment. For development and compiling, using **PlatformIO** (VS Code / CLion) or the **Arduino IDE** is recommended after installing the ESP8266 board package.
+
+### Dependencies & Libraries
+
+To successfully compile the firmware, you will need the following libraries:
+* `ESP8266WiFi` & `ESP8266HTTPClient` *(Built-in ESP8266 packages)*
+* `Wire` *(For I2C communication)*
+* `Adafruit GFX Library`
+* `Adafruit SSD1306`
+* `DHT sensor library` (by Adafruit)
